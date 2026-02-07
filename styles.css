@@ -7,7 +7,7 @@
   --faint: rgba(244,241,236,.14);
   --rule: rgba(244,241,236,.10);
 
-  /* Oxblood accent (Rutgers foreshadow 😈) */
+  /* Oxblood accent */
   --accent: #5a1e1e;
   --accent2: #7a2b2b;
 
@@ -33,6 +33,15 @@ body{
   line-height: 1.6;
   letter-spacing: .01em;
   overflow-x: hidden; /* prevents mobile side-scroll */
+
+  /* iOS / font rendering polish */
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
 }
 
 /* subtle grain */
@@ -56,9 +65,28 @@ a.link{
 }
 a.link:hover{ text-decoration-color: rgba(244,241,236,.6); }
 
+/* Accessible focus (premium feel + keyboard usability) */
+:focus-visible{
+  outline: 2px solid rgba(244,241,236,.35);
+  outline-offset: 3px;
+}
+.btn:focus-visible,
+.iconbtn:focus-visible,
+.nav__link:focus-visible,
+.mark:focus-visible{
+  outline: 2px solid rgba(244,241,236,.35);
+  outline-offset: 3px;
+}
+
 .wrap{
   width: min(var(--wrap), calc(100% - 44px));
   margin: 0 auto;
+}
+
+@media (max-width: 420px){
+  .wrap{
+    width: min(var(--wrap), calc(100% - 32px)); /* a touch more breathing room on small phones */
+  }
 }
 
 .skip{
@@ -87,6 +115,10 @@ a.link:hover{ text-decoration-color: rgba(244,241,236,.6); }
   z-index: 20;
   background: rgba(15,17,21,.88); /* fallback if blur unsupported */
   border-bottom: 1px solid rgba(244,241,236,.06);
+
+  /* helps prevent iOS repaint jitter on sticky + blur */
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* only apply blur when supported (prevents odd iOS rendering) */
@@ -162,10 +194,14 @@ a.link:hover{ text-decoration-color: rgba(244,241,236,.6); }
   font-size: 14px;
   letter-spacing: .01em;
   transition: transform .15s ease, border-color .15s ease, background .15s ease;
+  cursor: pointer;
 }
 .btn:hover{
   transform: translateY(-1px);
   border-color: rgba(244,241,236,.26);
+}
+.btn:active{
+  transform: translateY(0);
 }
 .btn--ghost{
   background: transparent;
@@ -190,6 +226,9 @@ a.link:hover{ text-decoration-color: rgba(244,241,236,.6); }
   transform: translateY(-1px);
   border-color: rgba(244,241,236,.26);
   background: rgba(244,241,236,.06);
+}
+.iconbtn:active{
+  transform: translateY(0);
 }
 .iconbtn--sm{
   width: 38px;
@@ -582,14 +621,41 @@ a.link:hover{ text-decoration-color: rgba(244,241,236,.6); }
   transform: translateY(0);
 }
 
+/* Reduced motion: no reveal animations */
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* Responsive */
 @media (min-width: 860px){
   .nav{ display:flex; }
 }
+
+/* 2-col breakpoint for nicer mid-width layout */
+@media (max-width: 1100px){
+  .grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 980px){
   .hero__inner{ grid-template-columns: 1fr; }
   .grid{ grid-template-columns: 1fr; }
   .about{ grid-template-columns: 1fr; }
   .contact{ grid-template-columns: 1fr; }
   .twocta{ grid-template-columns: 1fr; }
+
+  /* slightly tighter hero on mobile */
+  .hero{ padding: 52px 0 24px; }
+  .section{ padding: 40px 0 50px; }
+}
+
+/* Small phones: keep footer from feeling cramped */
+@media (max-width: 520px){
+  .foot__inner{
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
