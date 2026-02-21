@@ -1,164 +1,152 @@
-// app.js
+// app.js — GVP Portfolio
 (() => {
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  'use strict';
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---- Footer year ----
-  const y = document.getElementById("year");
-  if (y) y.textContent = String(new Date().getFullYear());
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ---- One-time live region for a11y status ----
-  const ensureLiveRegion = () => {
-    let el = document.getElementById("live");
-    if (el) return el;
-    el = document.createElement("div");
-    el.id = "live";
-    el.setAttribute("aria-live", "polite");
-    el.setAttribute("aria-atomic", "true");
-    el.style.position = "fixed";
-    el.style.left = "-9999px";
-    el.style.top = "0";
-    document.body.appendChild(el);
-    return el;
+  // ---- Toast ----
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  const showToast = (msg = 'Copied') => {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
   };
 
+  // ---- Live region for a11y ----
+  let liveRegion;
   const announce = (msg) => {
-    const live = ensureLiveRegion();
-    // Clear first so repeated messages still announce
-    live.textContent = "";
-    setTimeout(() => (live.textContent = msg), 20);
-  };
-
-  // ---- Toast (no HTML required) ----
-  const showToast = (msg = "Copied") => {
-    let t = document.getElementById("toast");
-    if (!t) {
-      t = document.createElement("div");
-      t.id = "toast";
-      t.style.position = "fixed";
-      t.style.left = "50%";
-      t.style.bottom = "18px";
-      t.style.transform = "translateX(-50%) translateY(10px)";
-      t.style.opacity = "0";
-      t.style.transition = "opacity .18s ease, transform .18s ease";
-      t.style.zIndex = "9999";
-      t.style.padding = "10px 12px";
-      t.style.borderRadius = "999px";
-      t.style.border = "1px solid rgba(244,241,236,.16)";
-      t.style.background = "rgba(15,17,21,.88)";
-      t.style.color = "rgba(244,241,236,.92)";
-      t.style.backdropFilter = "blur(10px)";
-      t.style.webkitBackdropFilter = "blur(10px)";
-      t.style.font = "600 13px/1.2 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif";
-      t.style.letterSpacing = ".01em";
-      document.body.appendChild(t);
+    if (!liveRegion) {
+      liveRegion = document.createElement('div');
+      liveRegion.setAttribute('aria-live', 'polite');
+      liveRegion.setAttribute('aria-atomic', 'true');
+      Object.assign(liveRegion.style, { position: 'fixed', left: '-9999px', top: '0' });
+      document.body.appendChild(liveRegion);
     }
-
-    t.textContent = msg;
-
-    // Reset + animate in
-    t.style.opacity = "0";
-    t.style.transform = "translateX(-50%) translateY(10px)";
-    requestAnimationFrame(() => {
-      t.style.opacity = "1";
-      t.style.transform = "translateX(-50%) translateY(0)";
-    });
-
-    clearTimeout(showToast._timer);
-    showToast._timer = setTimeout(() => {
-      t.style.opacity = "0";
-      t.style.transform = "translateX(-50%) translateY(10px)";
-    }, 900);
+    liveRegion.textContent = '';
+    setTimeout(() => { liveRegion.textContent = msg; }, 20);
   };
 
-  // ---- Reveal on scroll ----
-  const nodes = Array.from(document.querySelectorAll("[data-reveal]"));
-  if (!prefersReduced && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-in");
-            io.unobserve(e.target);
-          }
-        }
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "80px 0px -40px 0px", // smoother timing
-      }
-    );
-    nodes.forEach((n) => io.observe(n));
-  } else {
-    nodes.forEach((n) => n.classList.add("is-in"));
-  }
-
-  // ---- Clipboard helpers ----
-  const writeClipboard = async (text) => {
-    // Try modern clipboard first
+  // ---- Clipboard ----
+  const writeClip = async (text) => {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(text);
       return true;
     }
-
-    // Fallback: textarea selection (more iOS-safe)
-    const ta = document.createElement("textarea");
+    const ta = document.createElement('textarea');
     ta.value = text;
-    ta.setAttribute("readonly", "");
-    ta.style.position = "fixed";
-    ta.style.top = "0";
-    ta.style.left = "-9999px";
-    ta.style.opacity = "0";
+    ta.setAttribute('readonly', '');
+    Object.assign(ta.style, { position: 'fixed', top: '0', left: '-9999px', opacity: '0' });
     document.body.appendChild(ta);
-
-    // iOS: explicit selection range helps
-    ta.focus();
-    ta.select();
-    ta.setSelectionRange(0, ta.value.length);
-
+    ta.focus(); ta.select(); ta.setSelectionRange(0, ta.value.length);
     let ok = false;
-    try {
-      ok = document.execCommand("copy");
-    } catch {
-      ok = false;
-    }
-
+    try { ok = document.execCommand('copy'); } catch {}
     document.body.removeChild(ta);
     return ok;
   };
 
   // ---- Copy buttons ----
-  const copyBtns = Array.from(document.querySelectorAll(".js-copy"));
-  copyBtns.forEach((btn) => {
-    // Store original label once to avoid layout jitter
-    if (!btn.dataset.label) btn.dataset.label = btn.textContent;
-
-    btn.addEventListener("click", async () => {
-      const text = btn.getAttribute("data-copy") || "";
+  document.querySelectorAll('.js-copy').forEach(btn => {
+    const original = btn.textContent.trim();
+    btn.addEventListener('click', async () => {
+      const text = btn.getAttribute('data-copy') || '';
       if (!text) return;
-
       btn.disabled = true;
-
       try {
-        const ok = await writeClipboard(text);
-        if (ok) {
-          btn.textContent = "Copied";
-          announce("Copied to clipboard");
-          showToast("Copied");
-        } else {
-          btn.textContent = "Copy failed";
-          announce("Copy failed");
-          showToast("Copy failed");
-        }
+        const ok = await writeClip(text);
+        btn.textContent = ok ? 'Copied!' : 'Failed';
+        announce(ok ? 'Copied to clipboard' : 'Copy failed');
+        showToast(ok ? 'Copied to clipboard' : 'Copy failed');
       } catch {
-        btn.textContent = "Copy failed";
-        announce("Copy failed");
-        showToast("Copy failed");
+        btn.textContent = 'Failed';
+        showToast('Copy failed');
       } finally {
-        setTimeout(() => {
-          btn.textContent = btn.dataset.label || "Copy";
-          btn.disabled = false;
-        }, 900);
+        setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1400);
       }
     });
   });
+
+  // ---- Reveal on scroll ----
+  const revealEls = document.querySelectorAll('[data-reveal], [data-reveal-right]');
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-in'));
+  }
+
+  // ---- Navbar scroll shadow ----
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const updateNav = () => {
+      navbar.style.boxShadow = window.scrollY > 10
+        ? '0 1px 24px rgba(0,0,0,.45)'
+        : 'none';
+    };
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+  }
+
+  // ---- Mobile menu ----
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+      mobileMenu.setAttribute('aria-hidden', String(!open));
+    });
+
+    // Close on link click
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!navbar.contains(e.target) && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  // ---- Active nav link on scroll ----
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu nav a');
+  if ('IntersectionObserver' in window && sections.length) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    }, { threshold: 0.35 });
+    sections.forEach(s => sectionObserver.observe(s));
+  }
+
 })();
