@@ -3,152 +3,176 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Education — GVP</title>
-  <meta name="description" content="Education — Ghanshyam Patel. University of Tennessee Chattanooga (BS Criminal Justice, Dec 2026). HarvardX & Yale certificates." />
-  <meta name="theme-color" content="#0f1115" />
+  <title>Education — Ghanshyam Patel</title>
+  <meta name="description" content="Ghanshyam Patel — B.S. Criminal Justice, UTC (Dec 2026). HarvardX & Yale certificates in law." />
+  <meta name="theme-color" content="#0c0e14" />
   <meta name="robots" content="index,follow" />
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css" />
-
-  <!-- Favicons (leave as-is for now) -->
   <link rel="icon" href="/favicon%20(1).ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" href="/favicon-512%20(1).png">
 </head>
-
 <body>
-  <a class="skip" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="top">
-    <div class="wrap top__inner">
-      <a class="mark" href="/" aria-label="Back to home">
-        <span class="mark__sig">GVP</span>
-        <span class="mark__name">Ghanshyam Patel</span>
+  <header class="nav-bar" id="navbar">
+    <div class="container nav-inner">
+      <a class="nav-logo" href="/" aria-label="Back to home">
+        <span class="logo-mark">GVP</span>
       </a>
-
-      <nav class="nav" aria-label="Primary">
-        <a class="nav__link" href="/#work">Work</a>
-        <a class="nav__link" href="/#about">About</a>
-        <a class="nav__link" href="/education.html">Education</a>
-        <a class="nav__link" href="/#contact">Contact</a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/#work">Work</a>
+        <a href="/#services">Services</a>
+        <a href="/#about">About</a>
+        <a href="/education.html">Education</a>
+        <a href="/#contact">Contact</a>
       </nav>
-
-      <div class="top__actions">
-        <a class="iconbtn" href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.4 8H4.6V24H.4V8ZM8.2 8H12.22V10.2H12.28C12.84 9.14 14.2 8.02 16.26 8.02C20.56 8.02 21.36 10.82 21.36 14.46V24H17.16V15.42C17.16 13.38 17.12 10.76 14.36 10.76C11.56 10.76 11.14 12.94 11.14 15.28V24H6.94V8H8.2Z"/>
+      <div class="nav-actions">
+        <a href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" rel="noopener noreferrer" class="nav-linkedin" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.4 8H4.6V24H.4V8ZM8.2 8h4.02v2.2h.06c.56-1.06 1.92-2.18 3.98-2.18 4.3 0 5.1 2.8 5.1 6.44V24h-4.2v-8.58c0-2.04-.04-4.66-2.8-4.66-2.8 0-3.22 2.18-3.22 4.52V24H8.2V8Z"/>
           </svg>
         </a>
-        <a class="btn btn--ghost" href="/#contact">Contact</a>
+        <a href="/#contact" class="btn btn-primary btn-sm">Let's Talk</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="rule" aria-hidden="true"></div>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <nav>
+        <a href="/#work">Work</a>
+        <a href="/#services">Services</a>
+        <a href="/#about">About</a>
+        <a href="/education.html">Education</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main id="main">
-    <section class="section">
-      <div class="wrap">
-        <header class="section__head" data-reveal>
-          <h1 class="section__title">Education</h1>
-          <p class="section__sub">
-            University background + certificates supporting my pre-law track.
-          </p>
-        </header>
+    <section class="section edu-hero">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-label">Education</span>
+          <h1 class="section-title">Academic background<br/>& credentials.</h1>
+          <p class="section-sub">University coursework and certificates supporting my pre-law track.</p>
+        </div>
 
-        <!-- University -->
-        <div class="about" data-reveal>
-          <div class="about__text">
-            <h2 class="mini__title">University of Tennessee at Chattanooga</h2>
-            <p>
-              <strong>B.S. in Criminal Justice</strong> — Expected Graduation: <strong>December 2026</strong><br/>
-              <strong>Pre-Law</strong>
-            </p>
-            <p class="muted">
-              Focused on legal internships and law-adjacent roles, while building practical web/product skills.
-            </p>
+        <!-- University Block -->
+        <div class="edu-uni" data-reveal>
+          <div class="edu-uni-left">
+            <div class="edu-uni-badge">
+              <span class="edu-badge-letter">UTC</span>
+            </div>
           </div>
-
-          <div class="about__cols">
-            <div class="mini">
-              <h3 class="mini__title">Focus</h3>
-              <ul class="mini__list">
-                <li>Pre-Law preparation</li>
-                <li>Legal internships</li>
-                <li>Technology + regulation</li>
-              </ul>
+          <div class="edu-uni-right">
+            <div class="edu-degree-tag">B.S. — Criminal Justice</div>
+            <h2 class="edu-school">University of Tennessee<br/>at Chattanooga</h2>
+            <div class="edu-meta">
+              <span class="edu-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Expected December 2026
+              </span>
+              <span class="edu-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Chattanooga, TN
+              </span>
+              <span class="edu-meta-item edu-focus">
+                Pre-Law Focus
+              </span>
+            </div>
+            <p class="edu-desc">Focused on law, criminal procedure, and the intersection of technology and legal systems. Pursuing legal internships and law-adjacent roles upon graduation.</p>
+            <div class="edu-open-for">
+              <div class="open-dot"></div>
+              <span>Open to legal internships and law-adjacent roles</span>
             </div>
           </div>
         </div>
 
         <!-- Certificates -->
-        <div class="section" style="padding-left:0;padding-right:0">
-          <header class="section__head" data-reveal>
-            <h2 class="section__title">Certificates</h2>
-            <p class="section__sub">
-              Supplementary legal education (click to open the PDFs).
-            </p>
-          </header>
+        <div class="edu-certs" data-reveal>
+          <h2 class="edu-certs-title">Certificates</h2>
+          <p class="edu-certs-sub">Supplementary legal education from top institutions.</p>
 
-          <div class="grid">
-            <!-- Harvard -->
-            <article class="card" data-reveal>
-              <div class="card__top">
-                <h3 class="card__title">HarvardX</h3>
-                <p class="card__tag">Certificate</p>
+          <div class="certs-grid">
+            <article class="cert-card">
+              <div class="cert-header">
+                <div class="cert-school-badge cert-harvard">HX</div>
+                <div>
+                  <div class="cert-institution">HarvardX</div>
+                  <div class="cert-type">Online Certificate</div>
+                </div>
               </div>
-
-              <a class="shot edu-cert" href="/harvard.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open HarvardX certificate PDF">
-                <img src="/harvard.png" alt="HarvardX certificate preview" loading="lazy" decoding="async" />
+              <a class="cert-preview" href="/harvard.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open HarvardX certificate">
+                <img src="/harvard.png" alt="HarvardX certificate" loading="lazy" decoding="async" />
+                <div class="cert-preview-overlay">
+                  <span>View PDF ↗</span>
+                </div>
               </a>
-
-              <div class="card__actions">
-                <a class="btn btn--ghost" href="/harvard.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
-              </div>
+              <a class="btn btn-ghost" href="/harvard.pdf" target="_blank" rel="noopener noreferrer">Open Certificate PDF</a>
             </article>
 
-            <!-- Yale -->
-            <article class="card" data-reveal>
-              <div class="card__top">
-                <h3 class="card__title">Yale</h3>
-                <p class="card__tag">Certificate</p>
+            <article class="cert-card">
+              <div class="cert-header">
+                <div class="cert-school-badge cert-yale">Y</div>
+                <div>
+                  <div class="cert-institution">Yale University</div>
+                  <div class="cert-type">Online Certificate</div>
+                </div>
               </div>
-
-              <a class="shot edu-cert" href="/yale.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Yale certificate PDF">
-                <img src="/yale.png" alt="Yale certificate preview" loading="lazy" decoding="async" />
+              <a class="cert-preview" href="/yale.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Yale certificate">
+                <img src="/yale.png" alt="Yale certificate" loading="lazy" decoding="async" />
+                <div class="cert-preview-overlay">
+                  <span>View PDF ↗</span>
+                </div>
               </a>
-
-              <div class="card__actions">
-                <a class="btn btn--ghost" href="/yale.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
-              </div>
+              <a class="btn btn-ghost" href="/yale.pdf" target="_blank" rel="noopener noreferrer">Open Certificate PDF</a>
             </article>
           </div>
         </div>
 
-        <!-- LinkedIn CTA -->
-        <div class="twocta" data-reveal>
-          <div class="twocta__box">
-            <h3>More details on LinkedIn</h3>
-            <p>Full coursework, certificates, and updates live there.</p>
-            <a class="btn" href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" rel="noopener noreferrer">
-              Visit LinkedIn
-            </a>
+        <!-- CTAs -->
+        <div class="edu-footer-ctas" data-reveal>
+          <div class="edu-cta-card">
+            <h3>More on LinkedIn</h3>
+            <p>Full coursework, certificate details, and professional updates.</p>
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" rel="noopener noreferrer">Visit LinkedIn</a>
           </div>
-          <div class="twocta__box">
-            <h3>Back to portfolio</h3>
-            <p>View selected projects and live deployments.</p>
-            <a class="btn btn--ghost" href="/#work">View work</a>
+          <div class="edu-cta-card">
+            <h3>Back to Portfolio</h3>
+            <p>View live projects and selected work.</p>
+            <a class="btn btn-ghost" href="/#work">View Work</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo">GVP</span>
+        <span class="footer-copy">© <span id="year"></span> Ghanshyam Patel</span>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/#work">Work</a>
+        <a href="/#services">Services</a>
+        <a href="/#about">About</a>
+        <a href="/education.html">Education</a>
+      </nav>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.4 8H4.6V24H.4V8ZM8.2 8h4.02v2.2h.06c.56-1.06 1.92-2.18 3.98-2.18 4.3 0 5.1 2.8 5.1 6.44V24h-4.2v-8.58c0-2.04-.04-4.66-2.8-4.66-2.8 0-3.22 2.18-3.22 4.52V24H8.2V8Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" aria-live="polite" aria-atomic="true"></div>
   <script src="/app.js" defer></script>
 </body>
 </html>
