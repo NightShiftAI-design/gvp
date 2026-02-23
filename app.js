@@ -1,12 +1,25 @@
 /* ============================================
-   GVP — app.js v2
-   All original functionality preserved.
+   GVP — app.js v3
    ============================================ */
 
 // ---- Year ----
 document.querySelectorAll('#year').forEach(el => {
   el.textContent = new Date().getFullYear();
 });
+
+// ---- Obfuscated email injection ----
+// Email is never in the HTML — assembled here at runtime only
+(function () {
+  const el = document.getElementById('js-email-link');
+  if (!el) return;
+  const u = 'shiv.06';
+  const d = 'hotmail.co.uk';
+  const s = 'Project Inquiry \u2014 GVP';
+  const b = 'Hey Ghanshyam, I\u2019m reaching out about [project/opportunity]. Here\u2019s my context: ';
+  el.href = 'mailto:' + u + '@' + d
+    + '?subject=' + encodeURIComponent(s)
+    + '&body=' + encodeURIComponent(b);
+})();
 
 // ---- Hamburger menu ----
 const hamburger = document.getElementById('hamburger');
@@ -20,7 +33,6 @@ if (hamburger && mobileMenu) {
     mobileMenu.setAttribute('aria-hidden', String(!isOpen));
   });
 
-  // Close on link click
   mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       hamburger.classList.remove('open');
@@ -36,9 +48,8 @@ const revealEls = document.querySelectorAll('[data-reveal], [data-reveal-right]'
 
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Slight stagger for siblings
         const delay = entry.target.dataset.delay || 0;
         setTimeout(() => {
           entry.target.classList.add('is-in');
@@ -46,19 +57,15 @@ if ('IntersectionObserver' in window) {
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  revealEls.forEach((el, i) => {
-    io.observe(el);
-  });
+  revealEls.forEach(el => io.observe(el));
 } else {
-  // Fallback: show everything
   revealEls.forEach(el => el.classList.add('is-in'));
 }
 
-// ---- Copy template button ----
+// ---- Toast ----
 const toast = document.getElementById('toast');
-
 function showToast(msg) {
   if (!toast) return;
   toast.textContent = msg;
@@ -66,36 +73,7 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-document.querySelectorAll('.js-copy').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const text = btn.dataset.copy;
-    if (!text) return;
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text)
-        .then(() => showToast('Template copied to clipboard'))
-        .catch(() => fallbackCopy(text));
-    } else {
-      fallbackCopy(text);
-    }
-  });
-});
-
-function fallbackCopy(text) {
-  const ta = document.createElement('textarea');
-  ta.value = text;
-  ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0';
-  document.body.appendChild(ta);
-  ta.focus(); ta.select();
-  try {
-    document.execCommand('copy');
-    showToast('Template copied to clipboard');
-  } catch {
-    showToast('Could not copy — please copy manually');
-  }
-  document.body.removeChild(ta);
-}
-
-// ---- Sticky nav shadow on scroll ----
+// ---- Sticky nav border on scroll ----
 const navbar = document.getElementById('navbar');
 if (navbar) {
   let ticking = false;
