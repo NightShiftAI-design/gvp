@@ -619,79 +619,114 @@ body::after {
 /* ============================================
    PROJECTS
    ============================================ */
+
+/*
+ * UNIFORM GRID — 3 equal columns, no featured card.
+ * Every card is identical: same thumbnail ratio,
+ * same body layout, same hover state. Zero exceptions.
+ */
 .projects-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-5);
+  align-items: stretch; /* cards stretch to equal height per row */
 }
-.project-featured { grid-column: 1 / -1; }
 
+/* .project-featured and .project-card-inner removed — all cards are equal */
 .project-card {
   border-radius: var(--r-xl);
   border: 1px solid var(--border);
   background: var(--bg-card);
   overflow: hidden;
+  display: flex;           /* card itself is a flex column */
+  flex-direction: column;
   transition:
     border-color var(--dur-md) var(--ease),
-    transform var(--dur-lg) var(--ease),
-    box-shadow var(--dur-lg) var(--ease);
+    transform    var(--dur-lg) var(--ease),
+    box-shadow   var(--dur-lg) var(--ease);
   position: relative;
 }
+
+/* Gold shimmer line — hidden until hover */
 .project-card::before {
   content: "";
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200,168,75,0.25), transparent);
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(200,168,75,0.5),
+    transparent);
   opacity: 0;
   transition: opacity var(--dur-md) var(--ease);
-  z-index: 1;
+  z-index: 2;
 }
 .project-card:hover {
   border-color: var(--border-gold);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg), 0 0 60px rgba(200,168,75,0.05);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg), 0 0 60px rgba(200,168,75,0.06);
 }
 .project-card:hover::before { opacity: 1; }
 
-.project-card-inner { display: flex; flex-direction: column; height: 100%; }
-.project-featured .project-card-inner { flex-direction: row; }
-
+/* ---- Thumbnail container ----
+ *
+ * THE KEY FIX: every card gets a fixed 16:9 container via
+ * padding-top trick. The image is absolutely positioned
+ * inside it and cropped with object-fit:cover.
+ * This is 100% immune to the image's natural dimensions.
+ */
 .project-img-wrap {
   position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.project-featured .project-img-wrap { width: 52%; }
-.project-img-wrap img {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  padding-top: 56.25%; /* 16:9 = 9/16 = 56.25% */
+  overflow: hidden;
+  flex-shrink: 0;       /* never compress below its ratio */
+  background: var(--charcoal-3); /* placeholder colour while image loads */
+}
+
+/* Absolutely fill the ratio container */
+.project-img-wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center top; /* favour top of screenshot — shows the hero area */
   display: block;
   transition: transform 0.7s var(--ease);
 }
-.project-featured .project-img-wrap img {
-  aspect-ratio: auto;
-  height: 100%;
-  object-fit: cover;
-}
 .project-card:hover .project-img-wrap img { transform: scale(1.04); }
 
-/* Image overlay */
+/* ---- Hover overlay (visit link) ---- */
 .project-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(10,10,11,0.7) 0%, rgba(10,10,11,0.2) 60%, transparent 100%);
-  display: flex; align-items: flex-end; justify-content: flex-start;
+  background: linear-gradient(
+    to top,
+    rgba(10,10,11,0.78) 0%,
+    rgba(10,10,11,0.18) 55%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
   padding: var(--sp-4) var(--sp-5);
   opacity: 0;
   transition: opacity 0.3s var(--ease);
+  z-index: 1;
 }
 .project-card:hover .project-overlay { opacity: 1; }
 
+/* ---- Card body — fills remaining height ---- */
 .project-body {
-  padding: var(--sp-6);
-  display: flex; flex-direction: column; flex: 1;
+  padding: var(--sp-5) var(--sp-5) var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* stretches so all bodies align at the bottom */
 }
+
 .project-meta {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: var(--sp-3);
 }
 .project-type {
@@ -708,9 +743,9 @@ body::after {
 }
 .project-name {
   font-family: var(--font-serif);
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);   /* slightly tighter than before — fits 3-col grid */
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.2;
   margin-bottom: var(--sp-3);
   color: var(--ivory);
 }
@@ -718,12 +753,13 @@ body::after {
   font-size: var(--text-sm);
   color: var(--ivory-dim);
   line-height: 1.7;
-  margin-bottom: var(--sp-5);
-  flex: 1;
+  margin-bottom: var(--sp-4);
+  flex: 1;  /* pushes role + stack to bottom */
   font-weight: 300;
 }
 .project-role {
-  display: flex; flex-direction: column;
+  display: flex;
+  flex-direction: column;
   margin-bottom: var(--sp-4);
   padding: var(--sp-3) var(--sp-4);
   border-radius: var(--r-sm);
@@ -744,7 +780,9 @@ body::after {
   font-weight: 300;
 }
 .project-stack {
-  display: flex; flex-wrap: wrap; gap: var(--sp-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
 }
 .project-stack span {
   padding: 4px 10px;
@@ -1120,14 +1158,19 @@ body::after {
 /* ============================================
    RESPONSIVE
    ============================================ */
+@media (max-width: 1100px) {
+  /* 3-col → 2-col at mid-tablet */
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 1040px) {
   .hero-inner { grid-template-columns: 1fr; }
   .hero-visual { display: none; }
   .services-grid { grid-template-columns: 1fr 1fr; }
   .about-grid { grid-template-columns: 1fr; gap: var(--sp-7); }
+}
+@media (max-width: 640px) {
+  /* 2-col → 1-col on mobile */
   .projects-grid { grid-template-columns: 1fr; }
-  .project-featured .project-card-inner { flex-direction: column; }
-  .project-featured .project-img-wrap { width: 100%; }
 }
 @media (max-width: 720px) {
   .hero { min-height: auto; padding: var(--sp-8) 0; }
