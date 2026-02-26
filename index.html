@@ -1,1144 +1,555 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ghanshyam Patel — Web Developer & Pre-Law</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<style>
-  :root {
-    --black: #080808;
-    --white: #f0ede6;
-    --cream: #e8e2d6;
-    --accent: #c8f53a;
-    --muted: #5a5a52;
-    --border: rgba(240,237,230,0.1);
-    --font-display: 'Bebas Neue', sans-serif;
-    --font-mono: 'DM Mono', monospace;
-    --font-body: 'DM Sans', sans-serif;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ghanshyam Patel | Pre-Law Student & Web Developer</title>
+  <meta name="description" content="Ghanshyam Patel – pre-law student, web developer, and founder building professional websites and AI-powered platforms. Portfolio, projects, and contact." />
+  <meta name="theme-color" content="#0a0a0b" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://gvp-puce.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ghanshyam Patel | Pre-Law Student & Web Developer" />
+  <meta property="og:description" content="Ghanshyam Patel – pre-law student, web developer, and founder building professional websites and AI-powered platforms. Portfolio, projects, and contact." />
+  <meta property="og:url" content="https://gvp-puce.vercel.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ghanshyam Patel | Pre-Law Student & Web Developer" />
+  <meta name="twitter:description" content="Ghanshyam Patel – pre-law student, web developer, and founder building professional websites and AI-powered platforms." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ghanshyam Patel",
+    "url": "https://gvp-puce.vercel.app/",
+    "sameAs": [
+      "https://www.linkedin.com/in/ghanshyam-p-b364b83a5/"
+    ],
+    "jobTitle": "Pre-Law Student & Web Developer",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Tennessee at Chattanooga"
+    },
+    "knowsAbout": ["Web Development", "Pre-Law", "Criminal Justice", "SaaS", "UI Design"]
   }
+  </script>
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Epilogue:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-html { font-size: 16px; scroll-behavior: auto; }
-
-body {
-background: var(–black);
-color: var(–white);
-font-family: var(–font-body);
-font-weight: 200;
-overflow-x: hidden;
-cursor: none;
-}
-
-/* ── CURSOR ── */
-.cursor {
-position: fixed;
-top: 0; left: 0;
-width: 12px; height: 12px;
-background: var(–accent);
-border-radius: 50%;
-pointer-events: none;
-z-index: 9999;
-transform: translate(-50%,-50%);
-transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
-mix-blend-mode: exclusion;
-}
-.cursor-follower {
-position: fixed;
-top: 0; left: 0;
-width: 40px; height: 40px;
-border: 1px solid rgba(200,245,58,0.4);
-border-radius: 50%;
-pointer-events: none;
-z-index: 9998;
-transform: translate(-50%,-50%);
-transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), width 0.4s, height 0.4s, border-color 0.3s;
-}
-.cursor-hover .cursor { width: 60px; height: 60px; background: var(–accent); }
-.cursor-hover .cursor-follower { width: 0; height: 0; }
-
-/* ── NOISE OVERLAY ── */
-body::before {
-content: ‘’;
-position: fixed;
-inset: 0;
-background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘1’/%3E%3C/svg%3E”);
-opacity: 0.035;
-pointer-events: none;
-z-index: 9990;
-}
-
-/* ── NAV ── */
-nav {
-position: fixed;
-top: 0; left: 0; right: 0;
-z-index: 100;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 24px 40px;
-border-bottom: 1px solid transparent;
-transition: border-color 0.4s, background 0.4s;
-}
-nav.scrolled {
-background: rgba(8,8,8,0.85);
-backdrop-filter: blur(20px);
-border-color: var(–border);
-}
-.nav-logo {
-font-family: var(–font-display);
-font-size: 1.5rem;
-letter-spacing: 0.05em;
-color: var(–white);
-text-decoration: none;
-}
-.nav-links { display: flex; gap: 36px; align-items: center; }
-.nav-links a {
-font-family: var(–font-mono);
-font-size: 0.7rem;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-color: var(–muted);
-text-decoration: none;
-transition: color 0.2s;
-}
-.nav-links a:hover { color: var(–white); }
-.nav-cta {
-font-family: var(–font-mono);
-font-size: 0.7rem;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: var(–black) !important;
-background: var(–accent);
-padding: 8px 18px;
-border-radius: 2px;
-text-decoration: none;
-transition: opacity 0.2s !important;
-}
-.nav-cta:hover { opacity: 0.85 !important; }
-
-/* ── SECTIONS ── */
-section { position: relative; }
-
-/* ── HERO ── */
-.hero {
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-padding: 0 40px 80px;
-overflow: hidden;
-}
-
-.hero-status {
-position: absolute;
-top: 120px; right: 40px;
-display: flex;
-align-items: center;
-gap: 8px;
-font-family: var(–font-mono);
-font-size: 0.65rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(–muted);
-}
-.status-dot {
-width: 6px; height: 6px;
-background: var(–accent);
-border-radius: 50%;
-animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-0%,100% { opacity: 1; }
-50% { opacity: 0.3; }
-}
-
-.hero-location {
-position: absolute;
-top: 120px; left: 40px;
-font-family: var(–font-mono);
-font-size: 0.65rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(–muted);
-}
-
-.hero-headline {
-font-family: var(–font-display);
-font-size: clamp(5rem, 13vw, 16rem);
-line-height: 0.88;
-letter-spacing: -0.01em;
-color: var(–white);
-overflow: hidden;
-}
-.hero-headline .line { overflow: hidden; display: block; }
-.hero-headline .word { display: inline-block; }
-
-.hero-sub-row {
-display: flex;
-align-items: flex-end;
-justify-content: space-between;
-margin-top: 40px;
-gap: 40px;
-}
-.hero-sub {
-max-width: 420px;
-font-size: 1rem;
-line-height: 1.65;
-color: var(–muted);
-font-weight: 300;
-}
-.hero-sub em { color: var(–white); font-style: normal; font-weight: 400; }
-
-.hero-stats {
-display: flex;
-gap: 48px;
-}
-.stat { text-align: right; }
-.stat-num {
-font-family: var(–font-display);
-font-size: 2.5rem;
-color: var(–white);
-display: block;
-line-height: 1;
-}
-.stat-label {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(–muted);
-margin-top: 4px;
-display: block;
-}
-
-.hero-scroll-hint {
-position: absolute;
-bottom: 80px; right: 40px;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 8px;
-}
-.scroll-line {
-width: 1px;
-height: 60px;
-background: linear-gradient(to bottom, var(–accent), transparent);
-animation: scrollDown 1.8s ease-in-out infinite;
-}
-@keyframes scrollDown {
-0% { transform: scaleY(0); transform-origin: top; }
-50% { transform: scaleY(1); transform-origin: top; }
-51% { transform: scaleY(1); transform-origin: bottom; }
-100% { transform: scaleY(0); transform-origin: bottom; }
-}
-.scroll-label {
-font-family: var(–font-mono);
-font-size: 0.55rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–muted);
-writing-mode: vertical-rl;
-}
-
-/* ── MARQUEE ── */
-.marquee-section {
-border-top: 1px solid var(–border);
-border-bottom: 1px solid var(–border);
-padding: 18px 0;
-overflow: hidden;
-white-space: nowrap;
-}
-.marquee-track {
-display: inline-flex;
-gap: 0;
-animation: marquee 18s linear infinite;
-}
-.marquee-item {
-font-family: var(–font-display);
-font-size: 1rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–muted);
-padding: 0 40px;
-}
-.marquee-item span {
-color: var(–accent);
-margin-right: 40px;
-}
-@keyframes marquee {
-from { transform: translateX(0); }
-to { transform: translateX(-50%); }
-}
-
-/* ── WORK ── */
-.work { padding: 120px 40px; }
-.section-header {
-display: flex;
-align-items: baseline;
-justify-content: space-between;
-margin-bottom: 80px;
-border-bottom: 1px solid var(–border);
-padding-bottom: 24px;
-}
-.section-label {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–accent);
-}
-.section-title {
-font-family: var(–font-display);
-font-size: clamp(2.5rem, 6vw, 6rem);
-line-height: 0.9;
-color: var(–white);
-}
-.section-count {
-font-family: var(–font-mono);
-font-size: 0.7rem;
-color: var(–muted);
-letter-spacing: 0.1em;
-}
-
-.projects-list { display: flex; flex-direction: column; gap: 2px; }
-
-.project-item {
-display: grid;
-grid-template-columns: 80px 1fr auto auto;
-gap: 40px;
-align-items: center;
-padding: 32px 0;
-border-bottom: 1px solid var(–border);
-text-decoration: none;
-color: var(–white);
-position: relative;
-overflow: hidden;
-transition: border-color 0.3s;
-cursor: none;
-}
-.project-item::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-background: var(–accent);
-transform: scaleX(0);
-transform-origin: left;
-transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
-z-index: 0;
-}
-.project-item:hover::before { transform: scaleX(1); }
-.project-item:hover .project-num,
-.project-item:hover .project-name,
-.project-item:hover .project-type,
-.project-item:hover .project-year,
-.project-item:hover .project-arrow { color: var(–black); }
-
-.project-num {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-color: var(–muted);
-letter-spacing: 0.1em;
-position: relative; z-index: 1;
-transition: color 0.3s;
-}
-.project-name {
-font-family: var(–font-display);
-font-size: clamp(1.8rem, 3.5vw, 3.2rem);
-letter-spacing: 0.02em;
-position: relative; z-index: 1;
-transition: color 0.3s;
-}
-.project-type {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: var(–muted);
-position: relative; z-index: 1;
-transition: color 0.3s;
-}
-.project-year {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-color: var(–muted);
-position: relative; z-index: 1;
-transition: color 0.3s;
-}
-.project-arrow {
-font-size: 1.2rem;
-color: var(–muted);
-position: relative; z-index: 1;
-transition: color 0.3s, transform 0.3s;
-}
-.project-item:hover .project-arrow { transform: rotate(-45deg); }
-
-/* Hover image preview */
-.project-preview {
-position: fixed;
-width: 320px;
-height: 200px;
-pointer-events: none;
-z-index: 200;
-opacity: 0;
-transition: opacity 0.3s;
-border-radius: 4px;
-overflow: hidden;
-box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-}
-.project-preview img {
-width: 100%; height: 100%;
-object-fit: cover;
-}
-
-/* ── SERVICES ── */
-.services { padding: 120px 40px; border-top: 1px solid var(–border); }
-.services-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 2px;
-margin-top: 80px;
-}
-.service-card {
-padding: 48px 40px;
-border: 1px solid var(–border);
-position: relative;
-overflow: hidden;
-transition: border-color 0.3s;
-}
-.service-card::after {
-content: ‘’;
-position: absolute;
-bottom: 0; left: 0; right: 0;
-height: 2px;
-background: var(–accent);
-transform: scaleX(0);
-transform-origin: left;
-transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
-}
-.service-card:hover::after { transform: scaleX(1); }
-.service-card:hover { border-color: rgba(200,245,58,0.2); }
-
-.service-num {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-letter-spacing: 0.15em;
-color: var(–accent);
-display: block;
-margin-bottom: 24px;
-}
-.service-title {
-font-family: var(–font-display);
-font-size: 2.2rem;
-letter-spacing: 0.03em;
-color: var(–white);
-line-height: 1;
-margin-bottom: 20px;
-}
-.service-desc {
-font-size: 0.85rem;
-line-height: 1.7;
-color: var(–muted);
-margin-bottom: 32px;
-}
-.service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.service-tag {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-border: 1px solid var(–border);
-padding: 4px 10px;
-color: var(–muted);
-border-radius: 2px;
-}
-.service-turnaround {
-margin-top: 24px;
-font-family: var(–font-mono);
-font-size: 0.65rem;
-letter-spacing: 0.08em;
-color: var(–accent);
-}
-
-/* ── PROCESS ── */
-.process { padding: 120px 40px; border-top: 1px solid var(–border); }
-.process-steps {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 1px;
-margin-top: 80px;
-background: var(–border);
-}
-.step {
-background: var(–black);
-padding: 48px 32px;
-position: relative;
-overflow: hidden;
-}
-.step::before {
-content: attr(data-num);
-font-family: var(–font-display);
-font-size: 8rem;
-color: rgba(240,237,230,0.04);
-position: absolute;
-bottom: -20px; right: -10px;
-line-height: 1;
-pointer-events: none;
-}
-.step-num {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-color: var(–accent);
-letter-spacing: 0.15em;
-margin-bottom: 20px;
-display: block;
-}
-.step-title {
-font-family: var(–font-display);
-font-size: 1.8rem;
-color: var(–white);
-margin-bottom: 16px;
-}
-.step-desc {
-font-size: 0.82rem;
-line-height: 1.7;
-color: var(–muted);
-}
-
-/* ── TESTIMONIAL ── */
-.testimonial {
-padding: 120px 40px;
-border-top: 1px solid var(–border);
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
-}
-.quote-mark {
-font-family: var(–font-display);
-font-size: 8rem;
-color: var(–accent);
-line-height: 0.5;
-margin-bottom: 40px;
-opacity: 0.6;
-}
-.quote-text {
-font-family: var(–font-display);
-font-size: clamp(2rem, 5vw, 5rem);
-color: var(–white);
-max-width: 900px;
-line-height: 1;
-letter-spacing: 0.01em;
-margin-bottom: 40px;
-}
-.quote-author {
-font-family: var(–font-mono);
-font-size: 0.7rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(–muted);
-}
-.quote-author span { color: var(–accent); }
-
-/* ── ABOUT ── */
-.about {
-padding: 120px 40px;
-border-top: 1px solid var(–border);
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 120px;
-align-items: start;
-}
-.about-left {}
-.about-text {
-font-size: 1.1rem;
-line-height: 1.8;
-color: var(–muted);
-margin-top: 32px;
-font-weight: 300;
-}
-.about-text strong { color: var(–white); font-weight: 400; }
-.about-ctas { display: flex; gap: 16px; margin-top: 40px; }
-.btn {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-text-decoration: none;
-padding: 12px 24px;
-border-radius: 2px;
-transition: all 0.2s;
-cursor: none;
-}
-.btn-primary { background: var(–accent); color: var(–black); }
-.btn-primary:hover { opacity: 0.85; }
-.btn-outline { border: 1px solid var(–border); color: var(–white); }
-.btn-outline:hover { border-color: var(–accent); color: var(–accent); }
-
-.about-right {}
-.skills-block { margin-bottom: 40px; }
-.skills-block-title {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–accent);
-margin-bottom: 16px;
-display: block;
-}
-.skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.skill-chip {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-letter-spacing: 0.08em;
-border: 1px solid var(–border);
-padding: 6px 14px;
-color: var(–white);
-border-radius: 2px;
-transition: border-color 0.2s, color 0.2s;
-}
-.skill-chip:hover { border-color: var(–accent); color: var(–accent); cursor: none; }
-
-/* ── CONTACT ── */
-.contact {
-padding: 120px 40px;
-border-top: 1px solid var(–border);
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 80px;
-align-items: center;
-}
-.contact-headline {
-font-family: var(–font-display);
-font-size: clamp(3rem, 8vw, 8rem);
-line-height: 0.88;
-color: var(–white);
-}
-.contact-headline em {
-font-style: normal;
-color: var(–accent);
-}
-.contact-links { display: flex; flex-direction: column; gap: 2px; }
-.contact-link {
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 28px 0;
-border-bottom: 1px solid var(–border);
-text-decoration: none;
-color: var(–white);
-transition: border-color 0.3s;
-cursor: none;
-}
-.contact-link:first-child { border-top: 1px solid var(–border); }
-.contact-link:hover { border-color: var(–accent); }
-.contact-link:hover .cl-arrow { transform: rotate(-45deg); color: var(–accent); }
-.cl-platform {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(–muted);
-}
-.cl-name {
-font-family: var(–font-display);
-font-size: 2rem;
-letter-spacing: 0.03em;
-}
-.cl-arrow {
-font-size: 1.4rem;
-color: var(–muted);
-transition: transform 0.3s, color 0.3s;
-}
-
-/* ── FOOTER ── */
-footer {
-padding: 40px;
-border-top: 1px solid var(–border);
-display: flex;
-align-items: center;
-justify-content: space-between;
-}
-.footer-logo {
-font-family: var(–font-display);
-font-size: 1.2rem;
-color: var(–muted);
-letter-spacing: 0.05em;
-}
-.footer-copy {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-letter-spacing: 0.1em;
-color: var(–muted);
-}
-.footer-links { display: flex; gap: 24px; }
-.footer-links a {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: var(–muted);
-text-decoration: none;
-transition: color 0.2s;
-}
-.footer-links a:hover { color: var(–white); }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-nav { padding: 20px 24px; }
-.nav-links { display: none; }
-.hero { padding: 0 24px 60px; }
-.hero-status { right: 24px; }
-.hero-location { left: 24px; }
-.hero-sub-row { flex-direction: column; align-items: flex-start; }
-.work, .services, .process, .testimonial, .about, .contact { padding: 80px 24px; }
-.services-grid { grid-template-columns: 1fr; }
-.process-steps { grid-template-columns: 1fr 1fr; }
-.about { grid-template-columns: 1fr; gap: 60px; }
-.contact { grid-template-columns: 1fr; gap: 60px; }
-.project-item { grid-template-columns: 60px 1fr auto; gap: 16px; }
-.project-year { display: none; }
-footer { flex-direction: column; gap: 20px; text-align: center; }
-}
-
-@media (max-width: 600px) {
-.process-steps { grid-template-columns: 1fr; }
-.hero-stats { gap: 24px; }
-}
-</style>
-
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="/favicon%20(1).ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/favicon-512%20(1).png">
 </head>
+
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- CURSOR -->
-
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursorFollower"></div>
-
-<!-- PROJECT PREVIEW -->
-
-<div class="project-preview" id="projectPreview">
-  <img src="" alt="" id="previewImg" />
-</div>
-
-<!-- NAV -->
-
-<nav id="nav">
-  <a href="#" class="nav-logo">GVP</a>
-  <div class="nav-links">
-    <a href="#work">Work</a>
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a href="#contact" class="nav-cta">Let's Talk</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-
-<section class="hero" id="hero">
-  <div class="hero-location">Based in Tennessee</div>
-  <div class="hero-status"><span class="status-dot"></span> Available</div>
-
-  <div class="hero-headline">
-    <span class="line"><span class="word">Ghanshyam</span></span>
-    <span class="line"><span class="word">Patel.</span></span>
-  </div>
-
-  <div class="hero-sub-row">
-    <p class="hero-sub">
-      Pre-Law student & web developer. Building <em>digital presence for real businesses</em> — clean, fast, and built to convert.
-    </p>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num">3+</span>
-        <span class="stat-label">Live Sites</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">2025</span>
-        <span class="stat-label">Active</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">TN</span>
-        <span class="stat-label">Based</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-scroll-hint">
-    <div class="scroll-line"></div>
-    <span class="scroll-label">Scroll</span>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-
-<div class="marquee-section">
-  <div class="marquee-track">
-    <span class="marquee-item">HTML/CSS/JS <span>✦</span></span>
-    <span class="marquee-item">Vercel Deployed <span>✦</span></span>
-    <span class="marquee-item">Pre-Law UTC <span>✦</span></span>
-    <span class="marquee-item">SaaS & MVPs <span>✦</span></span>
-    <span class="marquee-item">Campaign Sites <span>✦</span></span>
-    <span class="marquee-item">Local Business <span>✦</span></span>
-    <span class="marquee-item">Mobile-First <span>✦</span></span>
-    <span class="marquee-item">Conversion UX <span>✦</span></span>
-    <span class="marquee-item">HTML/CSS/JS <span>✦</span></span>
-    <span class="marquee-item">Vercel Deployed <span>✦</span></span>
-    <span class="marquee-item">Pre-Law UTC <span>✦</span></span>
-    <span class="marquee-item">SaaS & MVPs <span>✦</span></span>
-    <span class="marquee-item">Campaign Sites <span>✦</span></span>
-    <span class="marquee-item">Local Business <span>✦</span></span>
-    <span class="marquee-item">Mobile-First <span>✦</span></span>
-    <span class="marquee-item">Conversion UX <span>✦</span></span>
-  </div>
-</div>
-
-<!-- WORK -->
-
-<section class="work" id="work">
-  <div class="section-header">
-    <div>
-      <div class="section-label">Selected Work</div>
-      <div class="section-title">Live Projects,<br>Real Results.</div>
-    </div>
-    <span class="section-count">03 Projects</span>
-  </div>
-
-  <div class="projects-list">
-    <a href="https://www.nightshifthotels.com" target="_blank" class="project-item"
-       data-preview="nightshift.jpg">
-      <span class="project-num">01</span>
-      <span class="project-name">NightShift Hotels</span>
-      <span class="project-type">SaaS + Website</span>
-      <span class="project-year">2025</span>
-      <span class="project-arrow">↗</span>
-    </a>
-    <a href="https://www.joshjordanforsheriff.com" target="_blank" class="project-item"
-       data-preview="joshjordan.jpg">
-      <span class="project-num">02</span>
-      <span class="project-name">Josh Jordan for Sheriff</span>
-      <span class="project-type">Campaign Website</span>
-      <span class="project-year">2025</span>
-      <span class="project-arrow">↗</span>
-    </a>
-    <a href="https://www.gsudz.com" target="_blank" class="project-item"
-       data-preview="gsudz.jpg">
-      <span class="project-num">03</span>
-      <span class="project-name">Gsudz Detailing</span>
-      <span class="project-type">Local Business</span>
-      <span class="project-year">2025</span>
-      <span class="project-arrow">↗</span>
-    </a>
-  </div>
-</section>
-
-<!-- SERVICES -->
-
-<section class="services" id="services">
-  <div class="section-header">
-    <div>
-      <div class="section-label">Services</div>
-      <div class="section-title">What I Build<br>For You.</div>
-    </div>
-    <span class="section-count">03 Offerings</span>
-  </div>
-
-  <div class="services-grid">
-    <div class="service-card">
-      <span class="service-num">01 —</span>
-      <div class="service-title">Business Websites</div>
-      <p class="service-desc">Professional websites for local businesses that look credible, load fast, and drive real inquiries. Designed around your customers, not templates.</p>
-      <div class="service-tags">
-        <span class="service-tag">Custom Design</span>
-        <span class="service-tag">Mobile-First</span>
-        <span class="service-tag">Contact Forms</span>
-        <span class="service-tag">Maps + CTAs</span>
-      </div>
-      <div class="service-turnaround">⟶ Typical: 2–4 weeks</div>
-    </div>
-    <div class="service-card">
-      <span class="service-num">02 —</span>
-      <div class="service-title">Landing Pages</div>
-      <p class="service-desc">Single-page sites built to convert — for campaigns, product launches, or lead generation. Sharp copy, clean design, one clear action.</p>
-      <div class="service-tags">
-        <span class="service-tag">Conversion-Focused</span>
-        <span class="service-tag">Single Goal</span>
-        <span class="service-tag">Fast Turnaround</span>
-        <span class="service-tag">A/B Friendly</span>
-      </div>
-      <div class="service-turnaround">⟶ Typical: 5–7 days</div>
-    </div>
-    <div class="service-card">
-      <span class="service-num">03 —</span>
-      <div class="service-title">SaaS & MVPs</div>
-      <p class="service-desc">Early-stage products and web apps for founders who need to move fast. From concept to deployed product, built for real validation.</p>
-      <div class="service-tags">
-        <span class="service-tag">MVP Build</span>
-        <span class="service-tag">Clean UI</span>
-        <span class="service-tag">Integrations</span>
-        <span class="service-tag">Vercel Deploy</span>
-      </div>
-      <div class="service-turnaround">⟶ Typical: 7–14 days</div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-
-<section class="process">
-  <div class="section-header">
-    <div>
-      <div class="section-label">How It Works</div>
-      <div class="section-title">Idea to Live<br>in Days.</div>
-    </div>
-  </div>
-  <div class="process-steps">
-    <div class="step" data-num="01">
-      <span class="step-num">01 —</span>
-      <div class="step-title">Discover</div>
-      <p class="step-desc">We talk through your business, goals, and what's not working. No fluff — just clarity on what needs to be built.</p>
-    </div>
-    <div class="step" data-num="02">
-      <span class="step-num">02 —</span>
-      <div class="step-title">Design</div>
-      <p class="step-desc">A focused layout built around your customers and conversion goals. Every decision is intentional.</p>
-    </div>
-    <div class="step" data-num="03">
-      <span class="step-num">03 —</span>
-      <div class="step-title">Build</div>
-      <p class="step-desc">Clean code, fast load, mobile-first — shipped on Vercel. No bloat, no templates, no shortcuts.</p>
-    </div>
-    <div class="step" data-num="04">
-      <span class="step-num">04 —</span>
-      <div class="step-title">Launch</div>
-      <p class="step-desc">Live, tested, and ready to drive real inquiries from day one. You own everything.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIAL -->
-
-<section class="testimonial">
-  <div class="quote-mark">"</div>
-  <p class="quote-text">Badass. To the point — and it's already driving real conversions.</p>
-  <p class="quote-author"><span>Gavin Shaver</span> · Owner, Gsudz Detailing</p>
-</section>
-
-<!-- ABOUT -->
-
-<section class="about" id="about">
-  <div class="about-left">
-    <div class="section-label">About</div>
-    <div class="section-title" style="margin-top:16px;">Builder Mindset,<br>Legal Trajectory.</div>
-    <p class="about-text">
-      I'm a pre-law student at the <strong>University of Tennessee at Chattanooga</strong>, pursuing a B.S. in Criminal Justice with a focus on law. Since late 2025, I've shipped production websites for small businesses, a political campaign, and an early-stage SaaS product.
-      <br><br>
-      I'm drawn to the intersection of <strong>technology, business, and regulation</strong> — building real things while working toward a legal career. I take on selective web projects and I'm open to legal internships and law-adjacent roles.
-    </p>
-    <div class="about-ctas">
-      <a href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" class="btn btn-primary">LinkedIn ↗</a>
-      <a href="#contact" class="btn btn-outline">Get in Touch</a>
-    </div>
-  </div>
-  <div class="about-right">
-    <div class="skills-block">
-      <span class="skills-block-title">Tech</span>
-      <div class="skills-list">
-        <span class="skill-chip">HTML</span>
-        <span class="skill-chip">CSS</span>
-        <span class="skill-chip">JavaScript</span>
-        <span class="skill-chip">Responsive UI</span>
-        <span class="skill-chip">GitHub</span>
-        <span class="skill-chip">Vercel</span>
-      </div>
-    </div>
-    <div class="skills-block">
-      <span class="skills-block-title">Design</span>
-      <div class="skills-list">
-        <span class="skill-chip">Information Architecture</span>
-        <span class="skill-chip">Conversion UX</span>
-        <span class="skill-chip">Mobile-First</span>
-      </div>
-    </div>
-    <div class="skills-block">
-      <span class="skills-block-title">Law Track</span>
-      <div class="skills-list">
-        <span class="skill-chip">Criminal Justice B.S.</span>
-        <span class="skill-chip">HarvardX Cert.</span>
-        <span class="skill-chip">Yale Cert.</span>
-        <span class="skill-chip">UTC '26</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-
-<section class="contact" id="contact">
-  <div>
-    <div class="section-label">Contact</div>
-    <div class="contact-headline">Let's<br>Work<br><em>Together.</em></div>
-  </div>
-  <div>
-    <p style="color:var(--muted);font-size:0.85rem;line-height:1.7;margin-bottom:40px;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;">Pick the channel that works for you — I respond fast on all three.</p>
-    <div class="contact-links">
-      <a href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" class="contact-link">
-        <div>
-          <div class="cl-platform">LinkedIn</div>
-          <div class="cl-name">Message Directly</div>
-        </div>
-        <span class="cl-arrow">↗</span>
+  <!-- NAV -->
+  <header class="nav-bar" id="navbar">
+    <div class="container nav-inner">
+      <a class="nav-logo" href="#top" aria-label="Home">
+        <span class="logo-mark">GVP</span>
       </a>
-      <a href="sms:4237715523&body=Hey Ghanshyam, I'm reaching out about a project." class="contact-link">
-        <div>
-          <div class="cl-platform">Text</div>
-          <div class="cl-name">423-771-5523</div>
-        </div>
-        <span class="cl-arrow">↗</span>
-      </a>
-      <a href="mailto:hello@gshyamvp.com" class="contact-link">
-        <div>
-          <div class="cl-platform">Email</div>
-          <div class="cl-name">hello@gshyamvp.com</div>
-        </div>
-        <span class="cl-arrow">↗</span>
-      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="/education.html">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" rel="noopener noreferrer" class="nav-linkedin" aria-label="LinkedIn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.4 8H4.6V24H.4V8ZM8.2 8h4.02v2.2h.06c.56-1.06 1.92-2.18 3.98-2.18 4.3 0 5.1 2.8 5.1 6.44V24h-4.2v-8.58c0-2.04-.04-4.66-2.8-4.66-2.8 0-3.22 2.18-3.22 4.52V24H8.2V8Z"/>
+          </svg>
+        </a>
+        <a href="#contact" class="btn btn-primary btn-sm">Let's Talk</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </div>
-</section>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <nav>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="/education.html">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<!-- FOOTER -->
+  <main id="main">
 
-<footer>
-  <span class="footer-logo">GVP</span>
-  <span class="footer-copy">© 2025 Ghanshyam Patel · Chattanooga, TN</span>
-  <div class="footer-links">
-    <a href="/privacy.html">Privacy</a>
-    <a href="/terms.html">Terms</a>
-    <a href="/education.html">Education</a>
-  </div>
-</footer>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-bg">
+        <div class="hero-glow-1"></div>
+        <div class="hero-glow-2"></div>
+        <div class="hero-lines"></div>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-content" data-reveal>
+          <div class="hero-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span class="eyebrow-text">Based in Tennessee</span>
+            <span class="status-pip">Available</span>
+          </div>
+          <h1 class="hero-title">
+            <span class="sr-only">Ghanshyam Patel – Pre-Law Student & Web Developer — </span>Building digital<br/>
+            presence for<br/>
+            <em>real businesses.</em>
+          </h1>
+          <p class="hero-subtitle">
+            I design and ship websites that convert visitors into customers — clean, fast, and built to last. Alongside that, I'm pursuing a law track at UTC.
+          </p>
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-num">3+</span>
+              <span class="hero-stat-label">Live Sites</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-num">2025</span>
+              <span class="hero-stat-label">Active</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-num">TN</span>
+              <span class="hero-stat-label">Based</span>
+            </div>
+          </div>
+        </div>
 
-<script>
-  gsap.registerPlugin(ScrollTrigger);
+        <div class="hero-visual" data-reveal-right>
+          <div class="profile-card">
+            <div class="profile-avatar">
+              <div class="avatar-initials">GP</div>
+              <div class="avatar-ring"></div>
+            </div>
+            <div class="profile-info">
+              <strong>Ghanshyam Patel</strong>
+              <span>Web Builder · Pre-Law · UTC '26</span>
+            </div>
+            <div class="profile-stats">
+              <div class="stat">
+                <span class="stat-num">3+</span>
+                <span class="stat-label">Live Sites</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat">
+                <span class="stat-num">2025</span>
+                <span class="stat-label">Active</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat">
+                <span class="stat-num">TN</span>
+                <span class="stat-label">Based</span>
+              </div>
+            </div>
+            <div class="profile-tags">
+              <span class="tag">HTML/CSS/JS</span>
+              <span class="tag">Vercel</span>
+              <span class="tag">Pre-Law</span>
+              <span class="tag">SaaS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  /* ── CURSOR ── */
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursorFollower');
-  let mx = 0, my = 0, fx = 0, fy = 0;
+    <!-- WORK -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-label">Selected Work</span>
+          <h2 class="section-title">Live projects,<br/>real results.</h2>
+          <p class="section-sub">Every site is production-deployed, built for real clients and actual use cases — not mockups.</p>
+        </div>
 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
+        <div class="projects-grid">
 
-  function animateFollower() {
-    fx += (mx - fx) * 0.12;
-    fy += (my - fy) * 0.12;
-    follower.style.left = fx + 'px';
-    follower.style.top = fy + 'px';
-    requestAnimationFrame(animateFollower);
-  }
-  animateFollower();
+          <!-- Project 1: NightShift Hotels -->
+          <article class="project-card" data-reveal>
+            <div class="project-img-wrap">
+              <img src="/nightshift.jpg" alt="NightShift Hotels website" loading="lazy" decoding="async" />
+              <div class="project-overlay">
+                <a href="https://www.nightshifthotels.com" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-sm">Visit Site ↗</a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">SaaS + Website</span>
+                <span class="project-year">2025</span>
+              </div>
+              <h3 class="project-name">NightShift Hotels</h3>
+              <p class="project-desc">Hotels lose revenue when calls go unanswered after hours. NightShift provides AI-assisted call handling and reservation flows so properties never miss a booking.</p>
+              <div class="project-role">
+                <span class="role-label">My Role</span>
+                <span>Site design, UI, deployment & conversion layout</span>
+              </div>
+              <div class="project-stack">
+                <span>HTML/CSS</span><span>JS</span><span>Vercel</span><span>AI Integration</span>
+              </div>
+            </div>
+          </article>
 
-  document.querySelectorAll('a, button, .skill-chip').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      document.body.classList.add('cursor-hover');
-    });
-    el.addEventListener('mouseleave', () => {
-      document.body.classList.remove('cursor-hover');
-    });
-  });
+          <!-- Project 2: Josh Jordan for Sheriff -->
+          <article class="project-card" data-reveal>
+            <div class="project-img-wrap">
+              <img src="/joshjordan.jpg" alt="Josh Jordan for Sheriff campaign site" loading="lazy" decoding="async" />
+              <div class="project-overlay">
+                <a href="https://www.joshjordanforsheriff.com" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-sm">Visit Site ↗</a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">Campaign Website</span>
+                <span class="project-year">2025</span>
+              </div>
+              <h3 class="project-name">Josh Jordan for Sheriff</h3>
+              <p class="project-desc">A voter-first campaign site built for clarity and mobile performance. Structured narrative, clear CTAs, and fast load times to drive engagement.</p>
+              <div class="project-role">
+                <span class="role-label">My Role</span>
+                <span>Design, build, deployment & mobile-first layout</span>
+              </div>
+              <div class="project-stack">
+                <span>HTML/CSS</span><span>JS</span><span>Mobile-first</span>
+              </div>
+            </div>
+          </article>
 
-  /* ── NAV scroll ── */
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+          <!-- Project 3: Gsudz Detailing -->
+          <article class="project-card" data-reveal>
+            <div class="project-img-wrap">
+              <img src="/gsudz.jpg" alt="Gsudz Detailing website" loading="lazy" decoding="async" />
+              <div class="project-overlay">
+                <a href="https://www.gsudz.com" target="_blank" rel="noopener noreferrer" class="btn btn-white btn-sm">Visit Site ↗</a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">Local Business</span>
+                <span class="project-year">2025</span>
+              </div>
+              <h3 class="project-name">Gsudz Detailing</h3>
+              <p class="project-desc">A local auto detailing business needed pricing and contact to feel frictionless. Clean packages, strong CTAs, and quick-action map integration.</p>
+              <div class="project-role">
+                <span class="role-label">My Role</span>
+                <span>Build, layout, conversion polish & deployment</span>
+              </div>
+              <div class="project-stack">
+                <span>HTML/CSS</span><span>JS</span><span>Local SEO</span>
+              </div>
+            </div>
+          </article>
 
-  /* ── HERO headline animation ── */
-  gsap.from('.hero-headline .word', {
-    yPercent: 110,
-    duration: 1.2,
-    ease: 'power4.out',
-    stagger: 0.15,
-    delay: 0.3
-  });
-  gsap.from('.hero-sub', { opacity: 0, y: 30, duration: 1, ease: 'power3.out', delay: 0.9 });
-  gsap.from('.hero-stats .stat', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out', stagger: 0.1, delay: 1 });
-  gsap.from('.hero-status, .hero-location', { opacity: 0, duration: 1, delay: 1.2 });
+        </div>
+      </div>
+    </section>
 
-  /* ── PROJECT ITEMS ── */
-  gsap.from('.project-item', {
-    scrollTrigger: { trigger: '.projects-list', start: 'top 80%' },
-    opacity: 0, y: 40, stagger: 0.12, duration: 0.8, ease: 'power3.out'
-  });
+    <!-- TESTIMONIAL -->
+    <section class="section section-testimonial">
+      <div class="container">
+        <div class="testimonial-block" data-reveal>
+          <div class="testimonial-quote-mark">"</div>
+          <blockquote class="testimonial-text">
+            Badass. To the point — and it's already driving real conversions.
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-author-info">
+              <strong>Gavin Shaver</strong>
+              <span>Owner · Gsudz Detailing</span>
+            </div>
+            <a href="https://www.gsudz.com" target="_blank" rel="noopener noreferrer" class="testimonial-site-link">gsudz.com ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  /* ── SERVICE CARDS ── */
-  gsap.from('.service-card', {
-    scrollTrigger: { trigger: '.services-grid', start: 'top 80%' },
-    opacity: 0, y: 50, stagger: 0.15, duration: 0.8, ease: 'power3.out'
-  });
+    <!-- SERVICES -->
+    <section class="section section-alt" id="services">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-label">Services</span>
+          <h2 class="section-title">What I build<br/>for you.</h2>
+          <p class="section-sub">I work with a limited number of small businesses at a time — focused, fast, and built to convert.</p>
+        </div>
 
-  /* ── STEPS ── */
-  gsap.from('.step', {
-    scrollTrigger: { trigger: '.process-steps', start: 'top 80%' },
-    opacity: 0, y: 40, stagger: 0.12, duration: 0.8, ease: 'power3.out'
-  });
+        <div class="services-grid">
+          <div class="service-card" data-reveal>
+            <div class="service-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <h3>Business Websites</h3>
+            <p>Professional websites for local businesses that look credible, load fast, and drive real inquiries. Designed around your customers.</p>
+            <ul class="service-list">
+              <li>Custom design, no templates</li>
+              <li>Mobile-first, fast loading</li>
+              <li>Contact forms + maps + CTAs</li>
+              <li>Deployed & ready to go</li>
+            </ul>
+            <div class="service-for">Best for: Local service businesses, shops, tradespeople</div>
+            <div class="service-turnaround">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Typical turnaround: 2–4 weeks
+            </div>
+          </div>
 
-  /* ── QUOTE ── */
-  gsap.from('.quote-text', {
-    scrollTrigger: { trigger: '.testimonial', start: 'top 70%' },
-    opacity: 0, y: 40, duration: 1, ease: 'power3.out'
-  });
+          <div class="service-card" data-reveal>
+            <div class="service-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>Landing Pages</h3>
+            <p>Single-page sites built to convert — for campaigns, product launches, or lead generation. Sharp copy, clean design, clear action.</p>
+            <ul class="service-list">
+              <li>Conversion-focused layout</li>
+              <li>Optimized for a single goal</li>
+              <li>Fast turnaround</li>
+              <li>A/B friendly structure</li>
+            </ul>
+            <div class="service-for">Best for: Campaigns, product launches, lead gen</div>
+            <div class="service-turnaround">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Typical turnaround: 5–7 days
+            </div>
+          </div>
 
-  /* ── ABOUT ── */
-  gsap.from('.about-left > *, .about-right > *', {
-    scrollTrigger: { trigger: '.about', start: 'top 75%' },
-    opacity: 0, y: 30, stagger: 0.1, duration: 0.8, ease: 'power3.out'
-  });
+          <div class="service-card" data-reveal>
+            <div class="service-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+            </div>
+            <h3>SaaS & MVPs</h3>
+            <p>Early-stage products and web apps for founders who need to move fast. From concept to deployed product, built for real validation.</p>
+            <ul class="service-list">
+              <li>MVP scoping + build</li>
+              <li>Clean UI + user flows</li>
+              <li>Integrations + automation</li>
+              <li>Deployed on Vercel</li>
+            </ul>
+            <div class="service-for">Best for: Early-stage founders, startups</div>
+            <div class="service-turnaround">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Typical turnaround: 7–14 days
+            </div>
+          </div>
+        </div>
 
-  /* ── SECTION TITLES ── */
-  gsap.utils.toArray('.section-title').forEach(el => {
-    gsap.from(el, {
-      scrollTrigger: { trigger: el, start: 'top 85%' },
-      opacity: 0, y: 50, duration: 1, ease: 'power4.out'
-    });
-  });
+        <div class="services-cta" data-reveal>
+          <p>Have a project in mind? I take on a limited number of builds at a time.</p>
+          <a href="#contact" class="btn btn-primary">Start a Conversation</a>
+        </div>
+      </div>
+    </section>
 
-  /* ── PROJECT HOVER PREVIEW ── */
-  const preview = document.getElementById('projectPreview');
-  const previewImg = document.getElementById('previewImg');
+    <!-- PROCESS -->
+    <section class="section section-process">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-label">How It Works</span>
+          <h2 class="section-title">From idea to live<br/>in days, not months.</h2>
+        </div>
+        <div class="process-grid" data-reveal>
+          <div class="process-step">
+            <div class="process-num">01</div>
+            <div class="process-body">
+              <h3 class="process-title">Discover</h3>
+              <p class="process-desc">We talk through your business, goals, and what's not working. No fluff — just clarity on what needs to be built.</p>
+            </div>
+          </div>
+          <div class="process-connector" aria-hidden="true"></div>
+          <div class="process-step">
+            <div class="process-num">02</div>
+            <div class="process-body">
+              <h3 class="process-title">Design</h3>
+              <p class="process-desc">I build a focused layout around your customers and conversion goals. Every decision is intentional.</p>
+            </div>
+          </div>
+          <div class="process-connector" aria-hidden="true"></div>
+          <div class="process-step">
+            <div class="process-num">03</div>
+            <div class="process-body">
+              <h3 class="process-title">Build</h3>
+              <p class="process-desc">Clean code, fast load, mobile-first — shipped on Vercel. No bloat, no templates, no shortcuts.</p>
+            </div>
+          </div>
+          <div class="process-connector" aria-hidden="true"></div>
+          <div class="process-step">
+            <div class="process-num">04</div>
+            <div class="process-body">
+              <h3 class="process-title">Launch</h3>
+              <p class="process-desc">Live, tested, and ready to drive real inquiries from day one. You own everything.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  document.querySelectorAll('.project-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      const src = item.getAttribute('data-preview');
-      if (src) {
-        previewImg.src = src;
-        preview.style.opacity = '1';
-      }
-    });
-    item.addEventListener('mouseleave', () => {
-      preview.style.opacity = '0';
-    });
-    item.addEventListener('mousemove', e => {
-      preview.style.left = (e.clientX + 24) + 'px';
-      preview.style.top = (e.clientY - 100) + 'px';
-    });
-  });
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-left" data-reveal>
+            <span class="section-label">About</span>
+            <h2 class="section-title">Builder mindset,<br/>legal trajectory.</h2>
+            <p class="about-text">I'm a pre-law student at the University of Tennessee at Chattanooga, pursuing a B.S. in Criminal Justice with a focus on law. Since late 2025, I've shipped production websites for small businesses, a political campaign, and an early-stage SaaS product.</p>
+            <p class="about-text">I'm drawn to the intersection of technology, business, and regulation — building real things while working toward a legal career. I take on selective web projects and I'm open to legal internships and law-adjacent roles.</p>
+            <div class="about-open">
+              <div class="open-item">
+                <div class="open-dot"></div>
+                <div>
+                  <strong>Open to legal internships</strong>
+                  <span>Law-adjacent roles, policy, and legal tech</span>
+                </div>
+              </div>
+              <div class="open-item">
+                <div class="open-dot open-dot-amber"></div>
+                <div>
+                  <strong>Selective web projects</strong>
+                  <span>Small businesses and early-stage founders</span>
+                </div>
+              </div>
+            </div>
+            <a href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">View LinkedIn ↗</a>
+          </div>
 
-  /* ── MARQUEE pause on hover ── */
-  const track = document.querySelector('.marquee-track');
-  track.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
-  track.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
-</script>
+          <div class="about-right" data-reveal-right>
+            <div class="about-profile-card">
+              <div class="about-avatar">
+                <div class="avatar-initials-lg">GP</div>
+              </div>
+              <div class="about-skills">
+                <div class="skills-group">
+                  <span class="skills-label">Tech</span>
+                  <div class="skills-list">
+                    <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive UI</span><span>GitHub</span><span>Vercel</span>
+                  </div>
+                </div>
+                <div class="skills-group">
+                  <span class="skills-label">Design</span>
+                  <div class="skills-list">
+                    <span>Information Architecture</span><span>Conversion UX</span><span>Mobile-first</span>
+                  </div>
+                </div>
+                <div class="skills-group">
+                  <span class="skills-label">Law Track</span>
+                  <div class="skills-list">
+                    <span>Criminal Justice B.S.</span><span>HarvardX Cert.</span><span>Yale Cert.</span><span>UTC '26</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- CONTACT -->
+    <section class="section section-alt" id="contact">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-label">Contact</span>
+          <h2 class="section-title">Let's work together.</h2>
+          <p class="section-sub">Pick the channel that works for you — I respond fast on all three.</p>
+        </div>
+
+        <div class="contact-channels" data-reveal>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" rel="noopener noreferrer" class="contact-channel">
+            <div class="contact-channel-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.4 8H4.6V24H.4V8ZM8.2 8h4.02v2.2h.06c.56-1.06 1.92-2.18 3.98-2.18 4.3 0 5.1 2.8 5.1 6.44V24h-4.2v-8.58c0-2.04-.04-4.66-2.8-4.66-2.8 0-3.22 2.18-3.22 4.52V24H8.2V8Z"/></svg>
+            </div>
+            <div class="contact-channel-body">
+              <strong>LinkedIn</strong>
+              <span>Message me directly</span>
+            </div>
+            <div class="contact-channel-arrow">↗</div>
+          </a>
+
+          <!-- Text -->
+          <a href="sms:4237715523&body=Hey Ghanshyam, I'm reaching out about [project/opportunity]. Here's my context: " class="contact-channel contact-channel--gold" id="js-sms">
+            <div class="contact-channel-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="contact-channel-body">
+              <strong>Text Me</strong>
+              <span>Opens your messages app</span>
+            </div>
+            <div class="contact-channel-arrow">↗</div>
+          </a>
+
+          <!-- Email — href injected by JS, never in HTML -->
+          <a href="#" class="contact-channel" id="js-email-link">
+            <div class="contact-channel-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+            </div>
+            <div class="contact-channel-body">
+              <strong>Email Me</strong>
+              <span>Opens your mail app</span>
+            </div>
+            <div class="contact-channel-arrow">↗</div>
+          </a>
+
+        </div>
+
+        <div class="contact-meta" data-reveal>
+          <div class="contact-info-card">
+            <div class="contact-info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <strong>Chattanooga, TN</strong>
+              <span>Open to remote + local</span>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <strong>Response Time</strong>
+              <span>Usually within 24 hours</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo">GVP</span>
+        <span class="footer-copy">© <span id="year"></span> Ghanshyam Patel</span>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="/education.html">Education</a>
+      </nav>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/ghanshyam-p-b364b83a5/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.4 8H4.6V24H.4V8ZM8.2 8h4.02v2.2h.06c.56-1.06 1.92-2.18 3.98-2.18 4.3 0 5.1 2.8 5.1 6.44V24h-4.2v-8.58c0-2.04-.04-4.66-2.8-4.66-2.8 0-3.22 2.18-3.22 4.52V24H8.2V8Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="container footer-legal">
+      <a href="/privacy.html">Privacy Policy</a>
+      <span class="footer-legal-sep" aria-hidden="true">·</span>
+      <a href="/terms.html">Terms of Service</a>
+    </div>
+  </footer>
+
+  <div id="toast" aria-live="polite" aria-atomic="true"></div>
+  <script src="/app.js" defer></script>
 </body>
 </html>
